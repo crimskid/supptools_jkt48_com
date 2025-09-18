@@ -5,8 +5,8 @@
 // @description  Submit form otomatis ketika tombol filter ditekan
 // @match        https://jkt48.com/tickets/handshake/address/hid*
 // @grant        none
-// @updateURL    https://raw.github.com/crimskid/supptools_jkt48_com/VC_MnG_HS-step-3.meta.js
-// @downloadURL  https://raw.github.com/crimskid/supptools_jkt48_com/VC_MnG_HS-step-3.user.js
+// @updateURL    https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/VC_MnG_HS-step-3.meta.js
+// @downloadURL  https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/VC_MnG_HS-step-3.user.js
 // ==/UserScript==
 
 (function () {
