@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name         VC/MnG/HS step [2] - Hide EL Except Selected
+// @name         2SHots step [2] - Hide EL Except Selected
 // @namespace    http://tampermonkey.net/
 // @version      1.3
-// @description  Hide all form-group elements except the one with Celline Thefani
+// @description  Hide all form-group elements except the one with Selected
 // @author       IceCrims
-// @match        https://jkt48.com/tickets/handshake/form/hid/*
+// @match        https://jkt48.com/tickets/twoshot/form/hid/*
 // @grant        GM_addStyle
-// @updateURL    https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/VC_MnG_HS-step-2.meta.js
-// @downloadURL  https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/VC_MnG_HS-step-2.user.js
+// @updateURL    https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/2S-step-2.meta.js
+// @downloadURL  https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/2S-step-2.user.js
 // ==/UserScript==
 
 (function () {
@@ -43,11 +43,11 @@
 
   box.innerHTML = `
         <div><strong>Filter Members</strong></div>
-        <label><input type="checkbox" id="filterEnable" checked> Enable Hide</label><br>
+        <label><input type="checkbox" id="filterEnable" checked> Enable Hide Names</label><br>
         <textarea id="allowedNames" style="width:100%; height:60px; margin-top:5px;">Fiony Alveria, Shania Gracia, Greesella Adhalia, Grace Octaviani</textarea>
         <br>
         <label><input type="checkbox" id="filterEnableSs" checked> Enable Hide Sesi</label><br>
-        <textarea id="allowedSessions" style="width:100%; height:40px; margin-top:5px;">Sesi1, Sesi2, Sesi4, Sesi5 </textarea>
+        <textarea id="allowedSessions" style="width:100%; height:40px; margin-top:5px;">Sesi5, Sesi3 </textarea>
         <button id="applyFilter" style="margin-top:5px; width:100%; background:orange; font-weight:bold; color:white;">Filter</button>
     `;
 
