@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  VC/MnG/HS - Hide El & SUbmit
-// @author       You
+// @author       IceCrims
 // @match        https://jkt48.com/tickets/handshake?*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/VC_MnG_HS-step-1.meta.js

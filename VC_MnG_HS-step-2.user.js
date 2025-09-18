@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.1
 // @description  Hide all form-group elements except the one with Celline Thefani
+// @author       IceCrims
 // @match        https://jkt48.com/tickets/handshake/form/hid/*
 // @grant        GM_addStyle
 // @updateURL    https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/VC_MnG_HS-step-2.meta.js

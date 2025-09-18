@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Submit form otomatis ketika tombol filter ditekan
+// @author       IceCrims
 // @match        https://jkt48.com/tickets/handshake/address/hid*
 // @grant        none
 // ==/UserScript==
