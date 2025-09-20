@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         VC/MnG/HS step [2] - Hide EL Except Selected
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.5
 // @description  Hide all form-group elements except the one with Celline Thefani
 // @author       IceCrims
 // @match        https://jkt48.com/tickets/handshake/form/hid/*
@@ -33,9 +33,12 @@
     "allowedNames",
     "Gracia, Fiony, Gresella, Grace"
   );
-  const savedEnNames = GM_getValue("enFilNames", "checked");
+  let savedEnNames = GM_getValue("enFilNames", "true");
+  savedEnNames = savedEnNames === "true" ? "checked" : "";
+
   const savedSession = GM_getValue("allowedSess", "Sesi1, Sesi2, Sesi6");
-  const savedEnSess = GM_getValue("enFilSess", "checked");
+  let savedEnSess = GM_getValue("enFilSess", "true");
+  savedEnSess = savedEnSess === "true" ? "checked" : "";
 
   // --- Create floating box ---
   const box = document.createElement("div");
@@ -73,8 +76,8 @@
     // Save current names to Tampermonkey storage
     GM_setValue("allowedNames", namesText);
     GM_setValue("enFilNames", enabled);
-    GM_setValue("allowedSess", enabledSs);
-    GM_setValue("enFilSess", sessText);
+    GM_setValue("allowedSess", sessText);
+    GM_setValue("enFilSess", enabledSs);
 
     const names = namesText
       .split(",")
