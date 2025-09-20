@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         VC/MnG/HS step [2] - Hide EL Except Selected
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.6
 // @description  Hide all form-group elements except the one with Celline Thefani
 // @author       IceCrims
 // @match        https://jkt48.com/tickets/handshake/form/hid/*
@@ -68,16 +68,16 @@
 
   // --- Filtering function ---
   function applyFilter() {
-    const enabled = document.querySelector("#filterEnable").checked;
-    const enabledSs = document.querySelector("#filterEnableSs").checked;
+    let enabled = document.querySelector("#filterEnable").checked;
+    let enabledSs = document.querySelector("#filterEnableSs").checked;
     const namesText = document.querySelector("#allowedNames").value;
     const sessText = document.querySelector("#allowedSessions").value;
 
     // Save current names to Tampermonkey storage
     GM_setValue("allowedNames", namesText);
-    GM_setValue("enFilNames", enabled);
+    GM_setValue("enFilNames", enabled === "true" ? "true" : "false");
     GM_setValue("allowedSess", sessText);
-    GM_setValue("enFilSess", enabledSs);
+    GM_setValue("enFilSess", enabledSs === "true" ? "true" : "false");
 
     const names = namesText
       .split(",")
