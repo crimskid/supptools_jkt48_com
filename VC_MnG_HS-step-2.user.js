@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         VC/MnG/HS step [2] - Hide EL Except Selected
 // @namespace    http://tampermonkey.net/
-// @version      1.8
+// @version      1.9
 // @description  Hide all form-group elements except the one with Selected
 // @author       IceCrims
 // @match        https://jkt48.com/tickets/handshake/form/hid/*
@@ -75,9 +75,9 @@
 
     // Save current names to Tampermonkey storage
     GM_setValue("allowedNames", namesText);
-    GM_setValue("enFilNames", enabled === "checked" ? "true" : "false");
+    GM_setValue("enFilNames", enabled ? "true" : "false");
     GM_setValue("allowedSess", sessText);
-    GM_setValue("enFilSess", enabledSs === "checked" ? "true" : "false");
+    GM_setValue("enFilSess", enabledSs ? "true" : "false");
 
     const names = namesText
       .split(",")
