@@ -6,6 +6,8 @@
 // @author       IceCrims
 // @match        https://jkt48.com/tickets/handshake/form/hid/*
 // @grant        GM_addStyle
+// @grant        GM_getValue
+// @grant        GM_setValue
 // @updateURL    https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/VC_MnG_HS-step-2.meta.js
 // @downloadURL  https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/VC_MnG_HS-step-2.user.js
 // ==/UserScript==
@@ -27,6 +29,14 @@
         }
     `);
 
+  const savedNames = GM_getValue(
+    "allowedNames",
+    "Gracia, Fiony, Gresella, Grace"
+  );
+  const savedEnNames = GM_getValue("enFilNames", "checked");
+  const savedSession = GM_getValue("allowedSess", "Sesi1, Sesi2, Sesi6");
+  const savedEnSess = GM_getValue("enFilSess", "checked");
+
   // --- Create floating box ---
   const box = document.createElement("div");
   box.style.position = "fixed";
@@ -43,11 +53,11 @@
 
   box.innerHTML = `
         <div><strong>Filter Members</strong></div>
-        <label><input type="checkbox" id="filterEnable" checked> Enable Hide</label><br>
-        <textarea id="allowedNames" style="width:100%; height:60px; margin-top:5px;">Fiony Alveria, Shania Gracia, Greesella Adhalia, Grace Octaviani</textarea>
+        <label><input type="checkbox" id="filterEnable" ${savedEnNames}> Enable Hide</label><br>
+        <textarea id="allowedNames" style="width:100%; height:60px; margin-top:5px;">${savedNames}</textarea>
         <br>
-        <label><input type="checkbox" id="filterEnableSs" checked> Enable Hide Sesi</label><br>
-        <textarea id="allowedSessions" style="width:100%; height:40px; margin-top:5px;">Sesi1, Sesi2, Sesi4, Sesi5 </textarea>
+        <label><input type="checkbox" id="filterEnableSs" ${savedEnSess}> Enable Hide Sesi</label><br>
+        <textarea id="allowedSessions" style="width:100%; height:40px; margin-top:5px;">${savedSession}</textarea>
         <button id="applyFilter" style="margin-top:5px; width:100%; background:orange; font-weight:bold; color:white;">Filter</button>
     `;
 
@@ -57,15 +67,22 @@
   function applyFilter() {
     const enabled = document.querySelector("#filterEnable").checked;
     const enabledSs = document.querySelector("#filterEnableSs").checked;
-    const names = document
-      .querySelector("#allowedNames")
-      .value.split(",")
+    const namesText = document.querySelector("#allowedNames").value;
+    const sessText = document.querySelector("#allowedSessions").value;
+
+    // Save current names to Tampermonkey storage
+    GM_setValue("allowedNames", namesText);
+    GM_setValue("enFilNames", enabled);
+    GM_setValue("allowedSess", enabledSs);
+    GM_setValue("enFilSess", sessText);
+
+    const names = namesText
+      .split(",")
       .map((n) => n.trim().toLowerCase())
       .filter((n) => n.length > 0);
 
-    const sessions = document
-      .querySelector("#allowedSessions")
-      .value.split(",")
+    const sessions = sessText
+      .split(",")
       .map((s) => s.trim().toLowerCase())
       .filter((s) => s.length > 0);
 
