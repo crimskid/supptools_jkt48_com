@@ -72,6 +72,7 @@
     let enabledSs = document.querySelector("#filterEnableSs").checked;
     const namesText = document.querySelector("#allowedNames").value;
     const sessText = document.querySelector("#allowedSessions").value;
+    const RecapSel = [];
 
     // Save current names to Tampermonkey storage
     GM_setValue("allowedNames", namesText);
@@ -94,6 +95,8 @@
       .forEach((el) => {
         const link = el.querySelector("a");
         const label = el.querySelector("label");
+        const select = el.querySelector("select");
+
         if (!enabled) {
           el.style.display = ""; // show everything if disabled
           return;
@@ -103,7 +106,9 @@
           return;
         }
         const nameText = link.textContent.trim().toLowerCase();
+        //console.log(nameText);
         const labelText = label ? label.textContent.trim().toLowerCase() : "";
+        console.log(select ? select.id : "SO");
         //const isAllowed = names.includes(nameText);
         const isNameAllowed = names.some((part) => nameText.includes(part));
         const isSessionAllowed = sessions.some((s) => labelText.includes(s));
@@ -118,6 +123,17 @@
         } else {
           if (isNameAllowed) {
             el.style.display = ""; // show
+            //el.html("TEst");
+            //console.log(el);
+            const input = document.createElement("input");
+            input.type = "text";
+            input.id = select ? select.id : "-";
+            input.className = "form-control";
+            input.name = select ? select.name : "-";
+            input.placeholder = "Enter something...";
+            input.value = 0;
+            input.style.margin = "5px 0 0 0";
+            el.appendChild(input);
           } else {
             el.style.display = "none"; // hide
           }

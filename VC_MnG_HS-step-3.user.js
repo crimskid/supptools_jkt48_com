@@ -1,13 +1,12 @@
 // ==UserScript==
 // @name         VC/MnG/HS step [3] - Auto Submit VC/MnG/HS Konfirmasi
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.0
 // @description  Submit form otomatis ketika tombol filter ditekan
-// @author       IceCrims
 // @match        https://jkt48.com/tickets/handshake/address/hid*
 // @grant        none
-// @updateURL    https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/VC_MnG_HS-step-3.meta.js
-// @downloadURL  https://raw.githubusercontent.com/crimskid/supptools_jkt48_com/main/VC_MnG_HS-step-3.user.js
+// @updateURL    https://raw.github.com/crimskid/supptools_jkt48_com/VC_MnG_HS-step-3.meta.js
+// @downloadURL  https://raw.github.com/crimskid/supptools_jkt48_com/VC_MnG_HS-step-3.user.js
 // ==/UserScript==
 
 (function () {
@@ -32,9 +31,22 @@
   }
 
   // Run once
-  autoClick();
+  //autoClick();
 
   // Keep watching for dynamically added posts
-  const observer = new MutationObserver(autoClick);
-  observer.observe(document.body, { childList: true, subtree: true });
+  //const observer = new MutationObserver(autoClick);
+  //observer.observe(document.body, { childList: true, subtree: true });
+
+  // ^ i disabled it for testing the redirect URL
+
+  //dikarenakan, bebaerapa step konfirmasi hanya sbgai konfrimasi ketentuan.
+  //setelah push jumlah ticket, langsung confirm,
+  // KECUALI, perlu mengubah CARA PEMBAYARAN
+  const currentUrl = window.location.href;
+  if (currentUrl.includes("/address/")) {
+    const newUrl = currentUrl.replace("/address/", "/comp/");
+    console.log("currentUrl: " + currentUrl);
+    console.log("newUrl: " + newUrl);
+    //window.location.href = newUrl;
+  }
 })();
