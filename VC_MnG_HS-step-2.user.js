@@ -144,4 +144,14 @@
   applyFilter();
   // --- Event listeners ---
   document.querySelector("#applyFilter").addEventListener("click", applyFilter);
+
+  //cek url
+  
+  const currentUrl = window.location.href;
+  if (currentUrl.includes("/form/")) {
+    const newUrl = currentUrl.replace("/form/", "/comp/");
+    console.log("currentUrl: " + currentUrl);
+    console.log("newUrl: " + newUrl);
+    //window.location.href = newUrl;
+  }
 })();
