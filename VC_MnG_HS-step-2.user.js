@@ -20,7 +20,7 @@
   GM_addStyle(`
         .entry-mypage form .btn.btn-block.btn-pink {
             position: fixed !important;
-            top: 220px !important;     /* jarak dari atas layar */
+            top: 150px !important;     /* jarak dari atas layar */
             right: 120px !important;   /* jarak dari kanan layar */
             width: 200px !important;   /* jangan full width */
             height: 100px !important;   /* jangan full width */
@@ -29,6 +29,7 @@
         }
     `);
 
+  const currentUrl = window.location.href;
   const savedNames = GM_getValue(
     "allowedNames",
     "Gracia, Fiony, Gresella, Grace"
@@ -42,6 +43,7 @@
 
   // --- Create floating box ---
   const box = document.createElement("div");
+  box.id = "filterBoxFloat";
   box.style.position = "fixed";
   box.style.top = "10px";
   //box.style.right = "10px";
@@ -90,6 +92,30 @@
       .map((s) => s.trim().toLowerCase())
       .filter((s) => s.length > 0);
 
+    //cek for added link or for inject form ^^
+    const cekEntrymy = document.querySelector(
+      ".entry-mypage__form .form-group"
+    );
+    // console.log(cekEntrymy);
+    if (!cekEntrymy) {
+      const secTtl = document.querySelector(".entry-contents__main-area"); // button back link
+
+      const linkcurr = document.createElement("a");
+      linkcurr.style.background = "rgba(62, 127, 247)";
+      linkcurr.className = "form-control";
+
+      const boldTextCurr = document.createElement("b");
+      boldTextCurr.textContent = "current Link";
+      linkcurr.appendChild(boldTextCurr);
+      linkcurr.append(": " + currentUrl);
+
+      linkcurr.href = currentUrl;
+      linkcurr.style.margin = "5px 0 0 0";
+      secTtl.append(linkcurr);
+      // /.button confirm link
+    }
+    // /.cek for added link or for inject form ^^
+
     document
       .querySelectorAll(".entry-mypage__form .form-group")
       .forEach((el) => {
@@ -108,11 +134,33 @@
         const nameText = link.textContent.trim().toLowerCase();
         //console.log(nameText);
         const labelText = label ? label.textContent.trim().toLowerCase() : "";
-        console.log(select ? select.id : "SO");
+        // console.log(select ? select.id : "SO");
         //const isAllowed = names.includes(nameText);
         const isNameAllowed = names.some((part) => nameText.includes(part));
         const isSessionAllowed = sessions.some((s) => labelText.includes(s));
         //el.style.display = isAllowed ? "" : "none";
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.style.background = "rgba(0, 0, 0, 0.3)";
+        input.id = select ? select.id : "-";
+        input.className = "form-control";
+        input.name = select ? select.name : "-";
+        if (!el.querySelector("input[name='" + input.name + "']")) {
+          input.placeholder = "Enter something...";
+          input.value = 0;
+          input.style.margin = "1px 0 0 0";
+          // el.appendChild(input);
+
+          const labl = document.createElement("label");
+          const boldTextlbl = document.createElement("b");
+          boldTextlbl.textContent = "[Box name: " + input.name + "]";
+          labl.style.margin = "5px 0 0 0";
+          labl.appendChild(boldTextlbl);
+
+          el.appendChild(labl);
+          el.appendChild(input);
+        }
 
         if (enabledSs) {
           if (isNameAllowed && isSessionAllowed) {
@@ -125,15 +173,6 @@
             el.style.display = ""; // show
             //el.html("TEst");
             //console.log(el);
-            const input = document.createElement("input");
-            input.type = "text";
-            input.id = select ? select.id : "-";
-            input.className = "form-control";
-            input.name = select ? select.name : "-";
-            input.placeholder = "Enter something...";
-            input.value = 0;
-            input.style.margin = "5px 0 0 0";
-            el.appendChild(input);
           } else {
             el.style.display = "none"; // hide
           }
@@ -146,12 +185,54 @@
   document.querySelector("#applyFilter").addEventListener("click", applyFilter);
 
   //cek url
-  
-  const currentUrl = window.location.href;
+  let confUrl = "";
+  let compUrl = "";
+
+  const fBf = document.querySelector("#filterBoxFloat");
+  fBf.appendChild(document.createElement("br"));
+  fBf.appendChild(document.createElement("br"));
+
   if (currentUrl.includes("/form/")) {
-    const newUrl = currentUrl.replace("/form/", "/comp/");
+    confUrl = currentUrl.replace("/form/", "/conf/");
+    compUrl = currentUrl.replace("/form/", "/comp/");
+
     console.log("currentUrl: " + currentUrl);
-    console.log("newUrl: " + newUrl);
+    console.log("confUrl: " + confUrl);
+    console.log("compUrl: " + compUrl);
     //window.location.href = newUrl;
+
+    // button confirm link
+    const linkConf = document.createElement("a");
+    linkConf.style.background = "rgba(62, 127, 247, 0.8)";
+    linkConf.className = "form-control bg-yellow";
+
+    const boldText = document.createElement("b");
+    boldText.textContent = "Link Confirm";
+    linkConf.appendChild(boldText);
+    linkConf.append(": " + confUrl);
+
+    linkConf.href = confUrl;
+    linkConf.style.margin = "5px 0 0 0";
+    linkConf.target = "_blank"; // open in a new tab
+    fBf.appendChild(linkConf);
+    // /.button confirm link
+
+    fBf.appendChild(document.createElement("br"));
+
+    // button complete link
+    const linkComp = document.createElement("a");
+    linkComp.style.background = "rgba(247, 62, 62, 0.8)";
+    linkComp.className = "form-control bg-yellow";
+
+    const boldText2 = document.createElement("b");
+    boldText2.textContent = "Link Complete [bahaya]";
+    linkComp.appendChild(boldText2);
+    linkComp.append(": " + compUrl);
+
+    linkComp.href = compUrl;
+    linkComp.style.margin = "5px 0 0 0";
+    linkComp.target = "_blank"; // open in a new tab
+    fBf.appendChild(linkComp);
+    // /.button complete link
   }
 })();
