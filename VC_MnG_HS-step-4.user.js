@@ -6,8 +6,8 @@
 // @author       IceCrims
 // @match        https://jkt48.com/tickets/handshake/comp/hid*
 // @grant        none
-// @updateURL    https://raw.github.com/crimskid/supptools_jkt48_com/VC_MnG_HS-step-3.meta.js
-// @downloadURL  https://raw.github.com/crimskid/supptools_jkt48_com/VC_MnG_HS-step-3.user.js
+// @updateURL    https://raw.github.com/crimskid/supptools_jkt48_com/VC_MnG_HS-step-4.meta.js
+// @downloadURL  https://raw.github.com/crimskid/supptools_jkt48_com/VC_MnG_HS-step-4.user.js
 // ==/UserScript==
 
 (function () {

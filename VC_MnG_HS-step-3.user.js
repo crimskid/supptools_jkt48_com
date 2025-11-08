@@ -31,7 +31,7 @@
   }
 
   // Run once
-  //autoClick();
+  autoClick();
 
   // Keep watching for dynamically added posts
   //const observer = new MutationObserver(autoClick);
