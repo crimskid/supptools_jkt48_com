@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         VC/MnG/HS step [2] - Hide EL Except Selected
 // @namespace    http://tampermonkey.net/
-// @version      1.10
+// @version      1.12
 // @description  Hide all form-group elements except the one with Selected
 // @author       IceCrims
 // @match        https://jkt48.com/tickets/handshake/form/hid/*
@@ -48,7 +48,7 @@
   box.style.top = "10px";
   //box.style.right = "10px";
   box.style.left = "10px";
-  box.style.background = "rgba(0,0,0,0.8)";
+  box.style.background = "rgba(0,0,0,0.3)";
   box.style.color = "#fff";
   box.style.padding = "10px";
   box.style.borderRadius = "8px";
@@ -155,6 +155,7 @@
           const labl = document.createElement("label");
           const boldTextlbl = document.createElement("b");
           boldTextlbl.textContent = "[Box name: " + input.name + "]";
+          labl.className = "lbl_box_inj";
           labl.style.margin = "5px 0 0 0";
           labl.appendChild(boldTextlbl);
 
